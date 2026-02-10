@@ -36,8 +36,6 @@ cd backend
 pip install -r requirements.txt
 ```
 
-> [!WARNING]
-> If `emergentintegrations==0.1.0` causes an error (private package), remove it from `requirements.txt` — it is not used in the codebase.
 
 ### 2.2 Create Backend `.env`
 
@@ -165,7 +163,7 @@ This bypasses the regular password check — you only need to provide the admin 
 
 | Problem | Solution |
 |---------|----------|
-| `emergentintegrations` install error | Remove it from `backend/requirements.txt` |
+
 | npm peer dependency errors | Use `npm install --legacy-peer-deps` |
 | `Cannot find module 'ajv/dist/compile/codegen'` | Run `npm install ajv@8.17.1 --legacy-peer-deps` |
 | Frontend won't start on Node 22+ | Use `npx craco start` instead of `npm start` |

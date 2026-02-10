@@ -20,7 +20,7 @@
     "Filter buttons are clickable and responsive",
     "Course filtering logic using useMemo works properly",
     "Category comparison (course.category vs filter value) working correctly",
-    "Page loads without errors at https://identical-copy-21.preview.emergentagent.com/courses",
+    "Page loads without errors at http://localhost:3000/courses",
     "Multi-language support working (Azerbaijani interface)",
     "Filter button styling and active state working correctly"
   ],
