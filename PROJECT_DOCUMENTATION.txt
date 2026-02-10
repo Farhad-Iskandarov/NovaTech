@@ -1,0 +1,473 @@
+================================================================================
+                    NOVATECH EDUCATION CENTER - PROJECT DOCUMENTATION
+================================================================================
+
+PROJECT OVERVIEW
+--------------------------------------------------------------------------------
+A full-stack, production-ready educational website for "Novatech Education Center" 
+located in Sumgayit, Azerbaijan. The website supports multiple languages and 
+includes a comprehensive admin panel for content management.
+
+================================================================================
+                              TECHNOLOGY STACK
+================================================================================
+
+FRONTEND:
+- React.js (JavaScript)
+- Tailwind CSS for styling
+- Framer Motion for animations
+- Shadcn/UI component library
+- Axios for API calls
+- React Router for navigation
+- Recharts for admin dashboard charts
+
+BACKEND:
+- FastAPI (Python)
+- MongoDB database
+- Motor (async MongoDB driver)
+- JWT authentication with bcrypt
+- Pydantic for data validation
+
+================================================================================
+                              FEATURES IMPLEMENTED
+================================================================================
+
+1. MULTI-LANGUAGE SUPPORT (LOCALIZATION)
+----------------------------------------
+- Supported languages: Azerbaijani (default), English, Russian
+- Language switcher in header with real country flags from flagcdn.com
+- Language preference persists in localStorage
+- All content (menus, buttons, forms, validation messages) switches language
+- Admin can manage content separately for each language
+
+Files created:
+- /app/frontend/src/lib/translations.js - All translations for EN/AZ/RU
+- /app/frontend/src/lib/LanguageContext.js - Language state management
+
+2. DARK/LIGHT MODE
+------------------
+- Theme toggle button (sun/moon icon) in header
+- Theme preference persists in localStorage
+- All UI components support dark mode styling
+- Smooth transition between themes
+
+Files created:
+- /app/frontend/src/lib/ThemeContext.js - Theme state management
+- Updated /app/frontend/src/index.css with dark mode CSS variables
+
+3. PUBLIC PAGES
+---------------
+
+HOME PAGE (/):
+- Hero section with title, subtitle, and CTA buttons
+- "Why Novatech" section with 5 feature cards
+- Popular courses section (6 courses displayed)
+- Testimonials section with student reviews
+- CTA section with WhatsApp contact button
+- Animated elements using Framer Motion
+
+ABOUT PAGE (/about):
+- Mission, Vision, Story sections
+- Statistics (500+ graduates, 6 courses, 10+ instructors)
+- Team section showing teachers with photos and roles
+- Location information (Markaz Plaza, Sumgayit)
+
+COURSES PAGE (/courses):
+- List of all courses with images
+- Filter by category (Development, Design, Marketing, Office, Kids)
+- Course cards showing title, description, duration, level, price
+- "Learn More" button linking to course detail
+
+COURSE DETAIL PAGE (/courses/:id):
+- Full course information (duration, format, level, certificate)
+- "What You Will Learn" section
+- Curriculum section
+- FAQ accordion (4 questions per course)
+- "Apply Now" button opening application modal
+
+BLOG PAGE (/blog):
+- Blog listing with featured images
+- Date, title, excerpt for each post
+- "Read More" links to blog detail
+
+BLOG DETAIL PAGE (/blog/:slug):
+- Full blog content
+- Back to blog navigation
+- Formatted with prose styling
+
+CONTACT PAGE (/contact):
+- Contact information (address, phone, email)
+- Google Maps embed
+- Contact form (name, email, phone, message)
+- Form submissions saved to database
+
+4. ADMIN PANEL
+--------------
+Custom admin path: /nova-admin
+
+ADMIN LOGIN (/nova-admin):
+- Secure JWT authentication
+- Rate limiting (30 requests per minute)
+- Email: farhad.isgandar@gmail.com
+- Password: Nova1234?
+
+ADMIN DASHBOARD (/nova-admin/dashboard):
+- Total visits statistics
+- Visits by day/week/month
+- Device distribution pie chart
+- Traffic by country bar chart
+- Top pages table
+
+COURSES MANAGEMENT (/nova-admin/courses):
+- Create, edit, delete courses
+- Multi-language title and description
+- Set category, duration, level, format, price
+- Toggle popular/active status
+
+BLOG MANAGEMENT (/nova-admin/blogs):
+- Create, edit, delete blog posts
+- Multi-language content
+- Auto-generate slug from title
+- Publish/draft status
+
+TESTIMONIALS MANAGEMENT (/nova-admin/testimonials):
+- Manage student reviews
+- Multi-language content
+- Rating (1-5 stars)
+- Active/inactive status
+
+TEACHERS MANAGEMENT (/nova-admin/teachers):
+- Add/edit/remove teachers
+- Name, role, bio (multi-language)
+- Profile photo URL
+- Display order
+
+SUBMISSIONS (/nova-admin/submissions):
+- View contact form submissions
+- View course applications
+- Mark as read
+- Reply via email
+- Delete submissions
+
+5. ADDITIONAL FEATURES
+----------------------
+
+FLOATING WHATSAPP BUTTON:
+- Fixed position bottom-right
+- Links to WhatsApp: +123456789
+- Hover tooltip
+
+COOKIE CONSENT BANNER:
+- GDPR-compliant
+- Accept/Decline buttons
+- Preference saved to localStorage
+- Multi-language support
+
+RESPONSIVE DESIGN:
+- Mobile, tablet, desktop breakpoints
+- Mobile hamburger menu
+- Adaptive layouts
+
+ANIMATIONS:
+- Fade-in, slide-up effects
+- Hover states on cards and buttons
+- Smooth page transitions
+
+================================================================================
+                              DATABASE STRUCTURE
+================================================================================
+
+COLLECTIONS:
+
+1. users
+   - id (UUID)
+   - email
+   - password_hash (bcrypt)
+   - role
+   - created_at
+
+2. courses
+   - id (UUID)
+   - title (en, az, ru)
+   - description (en, az, ru)
+   - duration
+   - format (Online/On-site/Hybrid)
+   - level (Beginner/Intermediate/Advanced)
+   - certificate (boolean)
+   - category
+   - outcomes (array of localized content)
+   - curriculum (array of localized content)
+   - price
+   - image_url
+   - is_popular
+   - is_active
+   - created_at
+
+3. faqs
+   - id (UUID)
+   - course_id
+   - question (en, az, ru)
+   - answer (en, az, ru)
+   - order
+
+4. blogs
+   - id (UUID)
+   - title (en, az, ru)
+   - content (en, az, ru)
+   - excerpt (en, az, ru)
+   - slug
+   - image_url
+   - meta_title
+   - meta_description
+   - is_published
+   - created_at
+   - updated_at
+
+5. testimonials
+   - id (UUID)
+   - name
+   - course
+   - content (en, az, ru)
+   - rating
+   - image_url
+   - is_active
+   - created_at
+
+6. teachers
+   - id (UUID)
+   - name
+   - role (en, az, ru)
+   - bio (en, az, ru)
+   - image_url
+   - order
+   - is_active
+   - created_at
+
+7. submissions
+   - id (UUID)
+   - type (contact/application)
+   - data (name, email, phone, message, course_id, course_name)
+   - created_at
+   - is_read
+
+8. analytics
+   - id (UUID)
+   - page_path
+   - page_title
+   - device_type
+   - country
+   - user_agent
+   - session_id
+   - timestamp
+
+================================================================================
+                              API ENDPOINTS
+================================================================================
+
+PUBLIC ENDPOINTS:
+-----------------
+GET  /api/                      - API info
+POST /api/seed                  - Seed database with initial data
+GET  /api/courses               - Get all courses
+GET  /api/courses/:id           - Get course by ID
+GET  /api/faqs/:course_id       - Get FAQs for a course
+GET  /api/blogs                 - Get all published blogs
+GET  /api/blogs/:slug           - Get blog by slug
+GET  /api/testimonials          - Get active testimonials
+GET  /api/teachers              - Get active teachers
+POST /api/submissions/contact   - Submit contact form
+POST /api/submissions/application - Submit course application
+POST /api/analytics/pageview    - Track page view
+
+AUTHENTICATION:
+---------------
+POST /api/auth/register         - Register new admin (disabled in production)
+POST /api/auth/login            - Admin login
+GET  /api/auth/me               - Get current user
+
+PROTECTED ENDPOINTS (require JWT token):
+----------------------------------------
+POST   /api/courses             - Create course
+PUT    /api/courses/:id         - Update course
+DELETE /api/courses/:id         - Delete course
+
+POST   /api/faqs                - Create FAQ
+PUT    /api/faqs/:id            - Update FAQ
+DELETE /api/faqs/:id            - Delete FAQ
+
+POST   /api/blogs               - Create blog
+PUT    /api/blogs/:id           - Update blog
+DELETE /api/blogs/:id           - Delete blog
+
+POST   /api/testimonials        - Create testimonial
+PUT    /api/testimonials/:id    - Update testimonial
+DELETE /api/testimonials/:id    - Delete testimonial
+
+POST   /api/teachers            - Create teacher
+PUT    /api/teachers/:id        - Update teacher
+DELETE /api/teachers/:id        - Delete teacher
+
+GET    /api/submissions         - Get all submissions
+PUT    /api/submissions/:id/read - Mark as read
+DELETE /api/submissions/:id     - Delete submission
+
+GET    /api/analytics/summary   - Get analytics summary
+
+================================================================================
+                              FILE STRUCTURE
+================================================================================
+
+/app/
+├── backend/
+│   ├── server.py              # Main FastAPI application with all routes
+│   ├── requirements.txt       # Python dependencies
+│   └── .env                   # Environment variables (MONGO_URL, DB_NAME)
+│
+├── frontend/
+│   ├── src/
+│   │   ├── App.js             # Main React app with routes
+│   │   ├── App.css            # Global styles
+│   │   ├── index.css          # Tailwind CSS with dark mode
+│   │   ├── index.js           # Entry point
+│   │   │
+│   │   ├── lib/
+│   │   │   ├── LanguageContext.js   # Language state management
+│   │   │   ├── ThemeContext.js      # Theme state management
+│   │   │   └── translations.js      # All translations (EN/AZ/RU)
+│   │   │
+│   │   ├── components/
+│   │   │   ├── Header.jsx           # Navigation header
+│   │   │   ├── Footer.jsx           # Site footer
+│   │   │   ├── PublicLayout.jsx     # Layout for public pages
+│   │   │   ├── AdminLayout.jsx      # Layout for admin pages
+│   │   │   ├── WhatsAppButton.jsx   # Floating WhatsApp button
+│   │   │   ├── CookieConsent.jsx    # Cookie consent banner
+│   │   │   └── ui/                  # Shadcn UI components
+│   │   │
+│   │   └── pages/
+│   │       ├── HomePage.jsx         # Home page
+│   │       ├── AboutPage.jsx        # About page
+│   │       ├── CoursesPage.jsx      # Courses listing
+│   │       ├── CourseDetailPage.jsx # Single course page
+│   │       ├── BlogPage.jsx         # Blog listing & detail
+│   │       ├── ContactPage.jsx      # Contact page
+│   │       ├── AdminLoginPage.jsx   # Admin login
+│   │       ├── AdminDashboard.jsx   # Admin dashboard
+│   │       ├── AdminCourses.jsx     # Courses management
+│   │       ├── AdminBlogs.jsx       # Blog management
+│   │       ├── AdminTestimonials.jsx # Testimonials management
+│   │       ├── AdminTeachers.jsx    # Teachers management
+│   │       └── AdminSubmissions.jsx # Submissions view
+│   │
+│   ├── package.json           # Node dependencies
+│   ├── tailwind.config.js     # Tailwind configuration
+│   └── .env                   # Frontend environment (REACT_APP_BACKEND_URL)
+
+================================================================================
+                              SEED DATA
+================================================================================
+
+The database is automatically seeded with:
+
+ADMIN USER:
+- Email: farhad.isgandar@gmail.com
+- Password: Nova1234?
+
+6 COURSES:
+1. Front-end Development (4 months, Hybrid, 500 AZN)
+2. Back-end Development (5 months, Hybrid, 600 AZN)
+3. Graphic Design (3 months, On-site, 400 AZN)
+4. SMM - Social Media Marketing (2 months, Online, 300 AZN)
+5. Microsoft Office (1.5 months, Hybrid, 200 AZN)
+6. IT for Kids (3 months, On-site, 250 AZN)
+
+4 FAQs PER COURSE:
+- Do I need prior knowledge?
+- Will I receive a certificate?
+- Are classes online?
+- Is installment payment available?
+
+3 TESTIMONIALS:
+- Elvin Mammadov (Front-end Development)
+- Aysel Huseynova (Graphic Design)
+- Murad Aliyev (Back-end Development)
+
+3 TEACHERS:
+- Farhad Isgandarov (Founder & Lead Instructor)
+- Leyla Ahmadova (Graphic Design Instructor)
+- Rashad Mammadov (Back-end Development Instructor)
+
+================================================================================
+                              CONTACT INFORMATION
+================================================================================
+
+Address: Sumgayit, Markaz Plaza, Azerbaijan
+Phone: +123456789
+WhatsApp: +123456789
+Email: info@novatech.az
+Instagram: instagram.com/novatech
+Facebook: facebook.com/novatech
+
+================================================================================
+                              DESIGN SPECIFICATIONS
+================================================================================
+
+PRIMARY COLOR: #5B5BF7 (Purple/Blue)
+SECONDARY COLOR: #00C9A7 (Teal/Green)
+
+FONTS:
+- Headings: Plus Jakarta Sans
+- Body: DM Sans
+
+STYLE: Modern minimalist with clean lines
+THEME: Light (default) / Dark mode available
+
+================================================================================
+                              HOW TO USE
+================================================================================
+
+1. ACCESSING THE WEBSITE:
+   - Open the website URL in browser
+   - Default language is Azerbaijani
+
+2. CHANGING LANGUAGE:
+   - Click on language switcher (flag icon) in header
+   - Select desired language (Azerbaijani, English, Russian)
+
+3. SWITCHING THEME:
+   - Click sun/moon icon in header to toggle dark/light mode
+
+4. VIEWING COURSES:
+   - Navigate to "Kurslar" (Courses)
+   - Use filters to narrow by category
+   - Click "Ətraflı" (Learn More) for details
+
+5. APPLYING FOR A COURSE:
+   - Go to course detail page
+   - Click "Müraciət Et" (Apply Now)
+   - Fill form and submit
+
+6. CONTACTING:
+   - Go to "Əlaqə" (Contact) page
+   - Fill contact form or use WhatsApp button
+
+7. ADMIN ACCESS:
+   - Go to /nova-admin
+   - Login with admin credentials
+   - Manage all content from dashboard
+
+================================================================================
+                              FUTURE ENHANCEMENTS
+================================================================================
+
+1. Google Analytics 4 integration (requires GA4 tracking ID)
+2. SEO meta tags per page per language
+3. Sitemap generation
+4. Email notifications for form submissions
+5. Online payment integration for course enrollment
+6. Student portal with progress tracking
+7. Certificate generation system
+
+================================================================================
+                    END OF DOCUMENTATION
+================================================================================

@@ -1,0 +1,23 @@
+/* Global App Styles */
+.App {
+  text-align: left;
+}
+
+/* Remove old default styles */
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: calc(10px + 2vmin);
+  color: #0f172a;
+}
+
+.App-link {
+  color: #5B5BF7;
+}

@@ -1,0 +1,113 @@
+{
+  "project_name": "Novatech Education Center",
+  "design_philosophy": {
+    "theme": "Swiss Tech Minimalist",
+    "core_values": ["Trust", "Modernity", "Clarity", "Future-Proof"],
+    "visual_style": "Clean grids, bold typography, organic tech shapes, high contrast",
+    "light_mode_only": true
+  },
+  "typography": {
+    "font_family": {
+      "heading": "Plus Jakarta Sans, sans-serif",
+      "body": "DM Sans, sans-serif",
+      "mono": "JetBrains Mono, monospace"
+    },
+    "weights": {
+      "heading": "Bold (700) or ExtraBold (800)",
+      "body": "Regular (400) or Medium (500)"
+    },
+    "scale": {
+      "h1": "text-5xl md:text-7xl tracking-tight leading-tight",
+      "h2": "text-4xl md:text-5xl tracking-tight",
+      "h3": "text-2xl md:text-3xl font-bold",
+      "body_lg": "text-lg md:text-xl leading-relaxed",
+      "body_base": "text-base leading-relaxed text-slate-600"
+    }
+  },
+  "colors": {
+    "primary": {
+      "DEFAULT": "#5B5BF7",
+      "foreground": "#FFFFFF",
+      "hover": "#4A4AE0",
+      "light": "#E0E0FC"
+    },
+    "secondary": {
+      "DEFAULT": "#00C9A7",
+      "foreground": "#FFFFFF",
+      "hover": "#00B395"
+    },
+    "background": {
+      "DEFAULT": "#FFFFFF",
+      "subtle": "#F8FAFC",
+      "dark": "#0F172A"
+    },
+    "text": {
+      "primary": "#0F172A",
+      "secondary": "#64748B",
+      "muted": "#94A3B8"
+    },
+    "border": {
+      "DEFAULT": "#E2E8F0",
+      "subtle": "#F1F5F9"
+    }
+  },
+  "layout_strategies": {
+    "marketing": {
+      "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+      "section_spacing": "py-20 md:py-32",
+      "grid_style": "Bento Grid (Asymmetric)",
+      "hero_style": "Split layout: Left text (60%), Right visual (40%) with floating elements"
+    },
+    "admin": {
+      "structure": "Sidebar Layout",
+      "sidebar_width": "w-64",
+      "main_content_bg": "bg-slate-50",
+      "card_style": "bg-white border border-slate-100 shadow-sm rounded-xl p-6"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-[#5B5BF7] hover:bg-[#4A4AE0] text-white rounded-full px-8 py-6 font-semibold shadow-lg shadow-blue-500/20 transition-all hover:-translate-y-1",
+      "secondary": "bg-white border-2 border-slate-200 text-slate-900 hover:border-[#5B5BF7] hover:text-[#5B5BF7] rounded-full px-8 py-6 font-semibold transition-all",
+      "ghost": "text-slate-600 hover:text-[#5B5BF7] hover:bg-blue-50 rounded-lg px-4 py-2"
+    },
+    "cards": {
+      "course": "group relative bg-white rounded-2xl border border-slate-100 overflow-hidden hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300",
+      "feature": "bg-slate-50 rounded-2xl p-8 hover:bg-white hover:shadow-lg transition-all border border-transparent hover:border-slate-100"
+    },
+    "inputs": {
+      "style": "h-12 rounded-lg border-slate-200 focus:border-[#5B5BF7] focus:ring-[#5B5BF7] bg-white"
+    },
+    "language_switcher": {
+      "style": "flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-sm font-medium transition-colors cursor-pointer",
+      "behavior": "Dropdown or Toggle. Must persist selection."
+    }
+  },
+  "assets": {
+    "images": {
+      "hero_main": "https://images.unsplash.com/photo-1764720572930-eb63afd14b06?q=85&w=1600&auto=format&fit=crop",
+      "about_team": "https://images.unsplash.com/photo-1758691736836-0413b066787a?q=85&w=1600&auto=format&fit=crop",
+      "course_coding": "https://images.unsplash.com/photo-1551402991-6e4b5fc0b01c?q=85&w=800&auto=format&fit=crop",
+      "course_design": "https://images.unsplash.com/photo-1758691736764-2a88e313b1f2?q=85&w=800&auto=format&fit=crop",
+      "testimonial_1": "https://images.pexels.com/photos/30004322/pexels-photo-30004322.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "testimonial_2": "https://images.pexels.com/photos/33871730/pexels-photo-33871730.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "abstract_bg": "https://images.unsplash.com/photo-1765164478579-2c041dad2c7d?q=85&w=1600&auto=format&fit=crop"
+    },
+    "icons": "Lucide React (default) or Heroicons"
+  },
+  "localization_rules": {
+    "languages": ["en", "az", "ru"],
+    "default": "en",
+    "storage_key": "novatech-lang-pref",
+    "implementation": "Use a React Context or simple state lifted to App.js to switch content. All static text must be in a translation object/file."
+  },
+  "universal_guidelines": [
+    "Do not use gradients for text.",
+    "Use 2-3x more spacing than typical designs (e.g., py-24 instead of py-12).",
+    "Every interaction needs a micro-animation (hover, focus, active).",
+    "All interactive elements must have data-testid attributes.",
+    "Use 'sonner' for toast notifications.",
+    "Do not use generic 'Lorem Ipsum'. Use realistic educational content."
+  ],
+  "instructions_to_main_agent": "1. Install 'lucide-react', 'framer-motion', 'clsx', 'tailwind-merge'. 2. Setup the Tailwind config with the colors provided. 3. Create the 'Layout' component that handles the Header (with Language Switcher) and Footer. 4. Build the Home page using the 'Bento' grid for the 'Why Novatech' section. 5. Ensure the Admin Dashboard is a separate layout route."
+}
