@@ -14,7 +14,7 @@ A full-stack multilingual (AZ/EN/RU) educational center website with admin dashb
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/NovaTech.git
+git clone https://github.com/Farhad-Iskandarov/NovaTech
 cd NovaTech
 
 # Backend setup
