@@ -21,7 +21,7 @@ A step-by-step guide to run the full-stack NovaTech application on your local ma
 ## 1. Clone & Navigate
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/NovaTech.git
+git clone https://github.com/Farhad-Iskandarov/NovaTech
 cd NovaTech
 ```
 
